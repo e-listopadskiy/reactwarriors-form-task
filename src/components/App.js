@@ -106,35 +106,36 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="form-container card">
-				<form className="form card-body" 
-				<Steps currentStep={this.state.currentStep} />
-          {this.state.currentStep === 1 ? (
-            <Basic
-              values={this.state.values}
-              onChange={this.onChange}
-              errors={this.state.errors}
-            />
-          ) : this.state.currentStep === 2 ? (
-            <Contacts
-              values={this.state.values}
-              onChange={this.onChange}
-              errors={this.state.errors}
-            />
-          ) : this.state.currentStep === 3 ? (
-            <Avatar
-              values={this.state.values}
-              onChange={this.onChange}
-              errors={this.state.errors}
-            />
-          ) : (
-            <Finish values={this.state.values} />
-          )}
-          <Buttons
-            onNext={this.onNext}
-            onPrevious={this.onPrevious}
-            onReset={this.onReset}
-            currentStep={this.state.currentStep}
-          />
+				<form className="form card-body">
+					<Steps currentStep={this.state.currentStep} />
+					{this.state.currentStep === 1 ? (
+						<Basic
+							values={this.state.values}
+							onChange={this.onChange}
+							errors={this.state.errors}
+						/>
+					) : this.state.currentStep === 2 ? (
+						<Contacts
+							values={this.state.values}
+							onChange={this.onChange}
+							errors={this.state.errors}
+						/>
+					) : this.state.currentStep === 3 ? (
+						<Avatar
+							values={this.state.values}
+							onChange={this.onChange}
+							errors={this.state.errors}
+						/>
+					) : (
+						<Finish values={this.state.values} />
+					)}
+					<Buttons
+						onNext={this.onNext}
+						onPrevious={this.onPrevious}
+						onReset={this.onReset}
+						currentStep={this.state.currentStep}
+					/>
+				</form>
 			</div>
 		);
 	}
