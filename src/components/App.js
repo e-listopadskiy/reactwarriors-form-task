@@ -1,109 +1,108 @@
-import React from "react";
-import Basic from "../components/Basic";
-import Contacts from "../components/Contacts";
-import Avatar from "../components/Avatar";
-import Finish from "../components/Finish";
-import Steps from "../components/Steps";
-import Buttons from "../components/Buttons";
+import React from 'react'
+import Basic from '../components/Basic'
+import Contacts from '../components/Contacts'
+import Avatar from '../components/Avatar'
+import Finish from '../components/Finish'
+import Steps from '../components/Steps'
+import Buttons from '../components/Buttons'
 
 const extraState = {
 	currentStep: 2,
 	values: {
-		firstname: "",
-		lastname: "",
-		password: "",
-		repeatPassword: "",
-		gender: "male",
-		email: "",
-		mobile: "",
-		country: "",
-		city: "",
-		avatar: "",
+		firstname: '',
+		lastname: '',
+		password: '',
+		repeatPassword: '',
+		gender: 'male',
+		email: '',
+		mobile: '',
+		country: '',
+		city: '',
+		avatar: '',
 	},
 	errors: {},
-};
+}
+
 export default class App extends React.Component {
 	constructor(props) {
-		super(props);
-		this.state = extraState;
+		super(props)
+		this.state = extraState
 	}
 
 	onChange = (event) => {
-		let dassssc;
-		const value = event.target.value;
-		const name = event.target.name;
-		const values = { ...this.state.values };
-		values[name] = value;
+		const value = event.target.value
+		const name = event.target.name
+		const values = { ...this.state.values }
+		values[name] = value
 		this.setState({
 			values,
-		});
-	};
+		})
+	}
 
 	onNext = (event) => {
-		event.preventDefault();
-		const validate = this.validate();
+		event.preventDefault()
+		const validate = this.validate()
 		if (Object.keys(validate).length) {
 			this.setState({
 				errors: validate,
-			});
+			})
 		} else {
 			this.setState((prevState) => ({
 				currentStep: prevState.currentStep + 1,
 				errors: {},
-			}));
+			}))
 		}
-	};
+	}
 	onPrevious = (event) => {
-		event.preventDefault();
+		event.preventDefault()
 		this.setState((prevState) => ({
 			currentStep: prevState.currentStep - 1,
-		}));
-	};
+		}))
+	}
 	onReset = (event) => {
-		event.preventDefault();
+		event.preventDefault()
 		this.setState({
 			...extraState,
-		});
-	};
+		})
+	}
 	validate = () => {
-		const { currentStep, values } = this.state;
-		const errors = {};
+		const { currentStep, values } = this.state
+		const errors = {}
 		if (currentStep === 1) {
 			if (values.firstname.length < 5) {
-				errors.firstname = "Required";
+				errors.firstname = 'Required'
 			}
 			if (values.lastname.length < 5) {
-				errors.lastname = "Required";
+				errors.lastname = 'Required'
 			}
 			if (!values.password) {
-				errors.password = "Required";
+				errors.password = 'Required'
 			}
 			if (values.repeatPassword !== values.password) {
-				errors.repeatPassword = "Must be equal password";
+				errors.repeatPassword = 'Must be equal password'
 			}
 		}
 		if (currentStep === 2) {
-			if (!values.email.includes("@")) {
-				errors.email = "Required";
+			if (!values.email.includes('@')) {
+				errors.email = 'Required'
 			}
 			if (values.mobile.length < 5) {
-				errors.mobile = "Invalid mobile ";
+				errors.mobile = 'Invalid mobile '
 			}
 			if (!values.city) {
-				errors.city = "Required";
+				errors.city = 'Required'
 			}
 			if (!values.country) {
-				errors.country = "Required";
+				errors.country = 'Required'
 			}
 		}
 		if (currentStep === 3) {
 			if (!values.avatar) {
-				errors.avatar = "Required";
+				errors.avatar = 'Required'
 			}
 		}
-		return errors;
-	};
-
+		return errors
+	}
 	render() {
 		return (
 			<div className="form-container card">
@@ -138,6 +137,6 @@ export default class App extends React.Component {
 					/>
 				</form>
 			</div>
-		);
+		)
 	}
 }
