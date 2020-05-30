@@ -2,9 +2,12 @@ import React from 'react'
 import countries from '../data/countries'
 import cities from '../data/cities'
 
-const Finish = (props) => {
+const Finish = props => {
   const { values } = props
+  const getCountryName = id =>
+    countries.find(item => Number(item.id) === Number(id)).name
 
+  const selectCityName = id => cities[id].name
   return (
     <div className="container-fluid">
       <div className="row mb-4">
@@ -22,6 +25,12 @@ const Finish = (props) => {
           </p>
           <p>
             <strong>Mobile:</strong> {values.mobile}
+          </p>
+          <p>
+            <strong>Location: </strong>
+            {`${getCountryName(values.country)}, ${selectCityName(
+              values.city
+            )}`}
           </p>
         </div>
       </div>

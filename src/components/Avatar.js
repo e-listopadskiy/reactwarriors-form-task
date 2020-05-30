@@ -9,8 +9,8 @@ const Avatar = (props) => {
 		reader.onload = (event) => {
 			onChange({
 				target: {
-					name: 'avatar',
 					value: event.target.result,
+					name: 'avatar',
 				},
 			})
 		}
