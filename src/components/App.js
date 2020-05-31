@@ -66,6 +66,9 @@ export default class App extends React.Component {
 		})
 	}
 	validate = () => {
+		const regExpEmail = /^\w{1,}@\w{2,}\.\w{2,}$/
+		const regExpMobile = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+
 		const { currentStep, values } = this.state
 		const errors = {}
 		if (currentStep === 1) {
@@ -83,10 +86,10 @@ export default class App extends React.Component {
 			}
 		}
 		if (currentStep === 2) {
-			if (!values.email.includes('@')) {
+			if (!regExpEmail.test(values.email)) {
 				errors.email = 'Required'
 			}
-			if (values.mobile.length < 5) {
+			if (!regExpMobile.test(values.mobile)) {
 				errors.mobile = 'Invalid mobile '
 			}
 			if (!values.city) {
