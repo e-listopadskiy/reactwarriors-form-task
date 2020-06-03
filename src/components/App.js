@@ -3,11 +3,11 @@ import Basic from '../components/Basic'
 import Contacts from '../components/Contacts'
 import Avatar from '../components/Avatar'
 import Finish from '../components/Finish'
-import Steps from '../components/Steps'
+import Steps from '../elements/Steps'
 import Buttons from '../components/Buttons'
 
 const extraState = {
-	currentStep: 2,
+	currentStep: 1,
 	values: {
 		firstname: '',
 		lastname: '',
@@ -68,42 +68,47 @@ export default class App extends React.Component {
 	validate = () => {
 		const regExpEmail = /^\w{1,}@\w{2,}\.\w{2,}$/
 		const regExpMobile = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
-
 		const { currentStep, values } = this.state
 		const errors = {}
-		if (currentStep === 1) {
-			if (values.firstname.length < 5) {
-				errors.firstname = 'Required'
-			}
-			if (values.lastname.length < 5) {
-				errors.lastname = 'Required'
-			}
-			if (!values.password) {
-				errors.password = 'Required'
-			}
-			if (values.repeatPassword !== values.password) {
-				errors.repeatPassword = 'Must be equal password'
-			}
+
+		switch (currentStep) {
+			case 1:
+				if (values.firstname.length < 5) {
+					errors.firstname = 'Required'
+				}
+				if (values.lastname.length < 5) {
+					errors.lastname = 'Required'
+				}
+				if (!values.password) {
+					errors.password = 'Required'
+				}
+				if (values.repeatPassword !== values.password) {
+					errors.repeatPassword = 'Must be equal password'
+				}
+				break
+			case 2:
+				if (!regExpEmail.test(values.email)) {
+					errors.email = 'Required'
+				}
+				if (!regExpMobile.test(values.mobile)) {
+					errors.mobile = 'Invalid mobile '
+				}
+				if (!values.city) {
+					errors.city = 'Required'
+				}
+				if (!values.country) {
+					errors.country = 'Required'
+				}
+				break
+			case 3:
+				if (!values.avatar) {
+					errors.avatar = 'Required'
+				}
+				break
+			default:
+				return null
 		}
-		if (currentStep === 2) {
-			if (!regExpEmail.test(values.email)) {
-				errors.email = 'Required'
-			}
-			if (!regExpMobile.test(values.mobile)) {
-				errors.mobile = 'Invalid mobile '
-			}
-			if (!values.city) {
-				errors.city = 'Required'
-			}
-			if (!values.country) {
-				errors.country = 'Required'
-			}
-		}
-		if (currentStep === 3) {
-			if (!values.avatar) {
-				errors.avatar = 'Required'
-			}
-		}
+
 		return errors
 	}
 	render() {

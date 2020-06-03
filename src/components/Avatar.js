@@ -34,7 +34,12 @@ const Avatar = (props) => {
 						id="customFile"
 						onChange={onChangeAvatar}
 					/>
-					<label className="custom-file-label" htmlFor="customFile">
+					<label
+						className={
+							errors.avatar ? 'custom-file-label invalid' : 'custom-file-label'
+						}
+						htmlFor="customFile"
+					>
 						Choose avatar
 					</label>
 				</div>
