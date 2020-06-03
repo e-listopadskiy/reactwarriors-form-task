@@ -47,16 +47,16 @@ export default class App extends React.Component {
 				errors: validate,
 			})
 		} else {
-			this.setState((prevState) => ({
-				currentStep: prevState.currentStep + 1,
+			this.setState((state) => ({
+				currentStep: state.currentStep + 1,
 				errors: {},
 			}))
 		}
 	}
 	onPrevious = (event) => {
 		event.preventDefault()
-		this.setState((prevState) => ({
-			currentStep: prevState.currentStep - 1,
+		this.setState((state) => ({
+			currentStep: state.currentStep - 1,
 		}))
 	}
 	onReset = (event) => {
